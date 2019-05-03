@@ -1,32 +1,40 @@
-import pygame
 import sys
 import cv2
 import numpy as np
-
-pygame.init()
  
 
 # my stuff
 #image = pygame.image.load(sys.argv[1])
 
 # get total number of frames
-cap = cv2.VideoCapture('youve_been_gnomed.mp4')
+film = cv2.VideoCapture(sys.argv[1])
 
-totalFrames = cap.get(cv2.CAP_PROP_FRAME_COUNT)
-totalFrames = int(totalFrames)
-image = cap.read(0)
-print totalFrames   
-for i in xrange(0, (totalFrames)):
-    img = cap.read(i)
-    for x in xrange(0, image.get_rect().size[0]):
+totalFrames = int(film.get(cv2.CAP_PROP_FRAME_COUNT))
+print totalFrames
+width = int(film.get(3))   # float
+height = int(film.get(4)) # float
+
+image = film.read(0)
+for i in xrange(1, (totalFrames-1)):
+    img = film.read(i)
+    for x in xrange(0, height):
+        print ("Frame:")
+        print (i)
+        print ("/")
+        print (totalFrames)
+        print ("---")
+        print ("Row:")
         print (x+1)
         print ("/")
-        print (image.get_rect().size[0])
+        print (height)
         print ("-----------")
-        for y in xrange(0, image.get_rect().size[1]):
-            pixel = img.get_at((x, y))
+        for y in xrange(0, width):
+            pixel = img[1][x][y]
             color = (pixel[0]+pixel[1]+pixel[2])/3
-            image.set_at((x,y), (color,color,color))
+            img[1][x][y] = [color,color,color]
 print ("DONE!")
 
-pygame.image.save(image, sys.argv[2])
+print image
+film.write
+ha = cv2.imwrite("./"+sys.argv[2],imgggg)
+print ha
