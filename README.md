@@ -1,4 +1,4 @@
 # cloud-remover2
 Now in python!
 
-Doesn't really work yet...
+now works (if you install the correct dependencies)
